@@ -1,0 +1,93 @@
+{% extends "client/base.html" %}
+{% load static %}
+{% block title %}Our Brands - Confidential Trading Pvt. Ltd.{% endblock %}
+{% block content %}
+    <style>
+        /* FIX FOR IPAD LANDSCAPE LAYOUT */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            .grid.ipad-landscape-brand-fix {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        /* Custom CSS for Hover Effects */
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .transform-hover-scale-105:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <section class="bg-gradient-to-r from-blue-50 to-white text-gray-900 py-16 md:py-20 rounded-3xl shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl mb-12">
+        <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
+            <h1 class="font-extrabold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">Our Partner Brands</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-4">Premium brands delivering quality products to Nepal.</p>
+        </div>
+    </section>
+    <div class="bg-white py-12 px-4 md:px-8 lg:px-16 rounded-2xl shadow-lg transition-shadow duration-300 hover:shadow-xl mb-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ipad-landscape-brand-fix">
+            {% for brand in brands %}
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden p-4 flex flex-col transition-shadow duration-300 hover:shadow-xl">
+                    <div class="w-full aspect-square mb-4 rounded-lg overflow-hidden">
+                        <img src="{{ brand.image.url }}"
+                             alt="{{ brand.name }}"
+                             class="w-full h-full object-contain transform transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ brand.name }}</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-geo-alt-fill mr-2 text-blue-500"></i>Country:</strong> {{ brand.country }}
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-calendar-check-fill mr-2 text-blue-500"></i>Established:</strong> {{ brand.establish_date|date:"Y" }}
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-box-seam-fill mr-2 text-blue-500"></i>Products:</strong> {{ brand.products.count }}
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">{{ brand.description }}</p>
+                    <a href="{% url 'brand_details' %}?brand_id={{ brand.id }}"
+                       class="mt-auto w-full text-center bg-blue-600 text-white py-3 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors duration-200">
+                        View Products
+                    </a>
+                </div>
+            {% empty %}
+                <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden p-4 flex flex-col transition-shadow duration-300 hover:shadow-xl">
+                    <div class="w-full aspect-square mb-4 rounded-lg overflow-hidden">
+                        <img src="{% static 'images/default_brand.webp' %}"
+                             alt="No Brands Available"
+                             class="w-full h-full object-contain transform transition-transform duration-300 hover:scale-105">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">No Brands Available Yet!</h3>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-geo-alt-fill mr-2 text-blue-500"></i>Country:</strong> N/A
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-calendar-check-fill mr-2 text-blue-500"></i>Established:</strong> N/A
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 flex items-center">
+                        <strong class="flex items-center mr-2"><i class="bi bi-box-seam-fill mr-2 text-blue-500"></i>Products:</strong> 0
+                    </p>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                        We are currently curating a selection of premium brands. Please check back soon for updates.
+                    </p>
+                    <a href="{% url 'connect_us' %}"
+                       class="mt-auto w-full text-center bg-blue-600 text-white py-3 rounded-md text-sm font-medium hover:bg-blue-700 transition-colors duration-200">
+                        Suggest a Brand or Partnership
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <section class="bg-gradient-to-r from-blue-50 to-white text-gray-900 py-16 md:py-20 rounded-3xl shadow-lg section-hover-shadow transition-shadow duration-300 ease-in-out">
+        <div class="container mx-auto px-6 md:px-12 lg:px-24 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Interested in Our Brands?</h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-4xl mx-auto">
+                Contact us to learn more about partnership opportunities and product availability.
+            </p>
+            <a href="{% url 'connect_us' %}"
+               class="btn-primary inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out text-base md:text-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
+                Contact Our Team
+            </a>
+        </div>
+    </section>
+{% endblock %}

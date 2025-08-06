@@ -1,0 +1,208 @@
+{% extends "client/base.html" %}
+{% load static %}
+{% block title %}About Us - Confidential Trading Pvt. Ltd.{% endblock %}
+{% block content %}
+    <style>
+        /* FIXES FOR IPAD LANDSCAPE LAYOUT */
+        @media (min-width: 1024px) and (max-width: 1279px) {
+            .grid.ipad-landscape-impact-fix,
+            .grid.ipad-landscape-team-fix {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        
+        /* Custom CSS for Hover Effects */
+        .hover\:shadow-xl:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        .transform-hover-scale-105:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <section class="bg-gradient-to-r from-blue-50 to-white text-gray-900 py-16 md:py-20 rounded-3xl shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl mb-12">
+        <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
+            <h1 class="font-extrabold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">About Confidential Trading</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-4">Building bridges between brands and communities across Nepal.</p>
+        </div>
+    </section>
+    <div class="py-4">
+        <section class="mb-16 shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl rounded-2xl p-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 pt-6">Our Story</h2>
+            <div class="flex flex-col">
+                <div class="">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Confidential Trading, established in 2021, is a distinguished importing and distribution company dedicated to serving the Nepalese market with fresh, high-quality products. Our commitment revolves around providing exceptional value by carefully selecting superior goods that meet the diverse needs of consumers. With a clear vision and strong dedication, we aim to become a trusted bridge between global brands and the Nepalese marketplace, ensuring consistency in quality and satisfaction.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Our team boasts an impressive blend of expertise, with over 20 years of experience in finance and banking policy, enabling us to manage our operations with strong financial discipline and strategic foresight. Complemented by more than 15 years of experience in importing and logistics, our professionals ensure seamless and efficient supply chain management. This robust foundation allows us to handle even the most complex distribution challenges with precision and reliability.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        In addition, our warehousing and product storage capabilities are supported by 15 years of specialized training, allowing us to maintain optimal product quality and inventory management. Our sales and marketing division, also enriched with over 15 years of experience, expertly navigates the nuances of Nepalese markets including general trade, modern retail, and HORECA sectors. This comprehensive knowledge ensures effective market penetration and brand representation.
+                    </p>
+                    <p class="text-gray-700 leading-relaxed">
+                        Driven by a motivated and consumer-focused team, Confidential Trading excels in selecting and distributing FMCG, HORECA, and non-food products from around the world. Our deep understanding of product trends and market demands, combined with a passion for excellence, positions us uniquely to cater to the evolving needs of Nepalese consumers. We pride ourselves on nurturing strong relationships with partners and customers alike, fostering growth and mutual success in the dynamic marketplace.
+                    </p>
+                </div>
+                <div class="w-full mt-8 pb-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <img src="{% static 'images/our_story_1.jpeg' %}"
+                         alt="People working collaboratively"
+                         class="rounded-lg shadow-lg w-full h-96 object-cover transform transition-transform duration-300 hover:scale-105">
+                    <img src="{% static 'images/our_story_2.jpeg' %}"
+                         alt="Warehouse operations"
+                         class="rounded-lg shadow-lg w-full h-96 object-cover transform transition-transform duration-300 hover:scale-105">
+                </div>
+            </div>
+        </section>
+        <section class="mb-16 text-center bg-gray-100 rounded-2xl shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 pt-6">Our Impact in Numbers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-6 px-6 ipad-landscape-impact-fix">
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <i class="bi bi-people-fill text-blue-600 text-5xl mb-4"></i>
+                    <p class="text-4xl font-bold text-blue-600">10+</p>
+                    <p class="text-gray-600">Distribution Partners</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <i class="bi bi-award-fill text-green-600 text-5xl mb-4"></i>
+                    <p class="text-4xl font-bold text-green-600">5+</p>
+                    <p class="text-gray-600">Partner Brands</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <i class="bi bi-geo-alt-fill text-red-600 text-5xl mb-4"></i>
+                    <p class="text-4xl font-bold text-red-600">35+</p>
+                    <p class="text-gray-600">Districts Covered</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <i class="bi bi-hourglass-split text-yellow-600 text-5xl mb-4"></i>
+                    <p class="text-4xl font-bold text-yellow-600">10+</p>
+                    <p class="text-gray-600">Years Experience</p>
+                </div>
+            </div>
+        </section>
+        <section class="mb-16 text-center shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl rounded-2xl p-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6">Our Leadership Team</h2>
+            <p class="text-gray-600 mb-8">Meet the dedicated professionals driving our success</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 ipad-landscape-team-fix">
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <img src="{% static 'images/pradip_rimal.jpg' %}"
+                         alt="Pradip Rimal"
+                         class="w-32 h-32 rounded-full mb-4 object-cover transform transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold text-gray-800">Pradip Rimal</h3>
+                    <p class="text-blue-600 text-sm">Director</p>
+                    <p class="text-gray-600 text-sm mt-2">Marketing expert with 15+ years in general, modern, and hyper market sectors.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <img src="{% static 'images/dikpal_paudel.jpg' %}"
+                         alt="Dikpal Paudel"
+                         class="w-32 h-32 rounded-full mb-4 object-cover transform transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold text-gray-800">Dikpal Paudel</h3>
+                    <p class="text-blue-600 text-sm">Executive Director</p>
+                    <p class="text-gray-600 text-sm mt-2">
+                        Finance and taxation specialist in Nepal with academic and practical expertise.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <img src="{% static 'images/sudan_thapa.jpg' %}"
+                         alt="Sudan Thapa"
+                         class="w-32 h-32 rounded-full mb-4 object-cover transform transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold text-gray-800">Sudan Thapa</h3>
+                    <p class="text-blue-600 text-sm">Executive Director</p>
+                    <p class="text-gray-600 text-sm mt-2">
+                        Detail-oriented accountant, 10+ years in Nepalese tax, VAT, and payroll management.
+                    </p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                    <img src="{% static 'images/araudra_dahal.jpg' %}"
+                         alt="Araudra Dahal"
+                         class="w-32 h-32 rounded-full mb-4 object-cover transform transition-transform duration-300 hover:scale-105">
+                    <h3 class="text-xl font-semibold text-gray-800">Araudra Dahal</h3>
+                    <p class="text-blue-600 text-sm">Executive Director</p>
+                    <p class="text-gray-600 text-sm mt-2">
+                        Warehouse and distribution leader with auto and FMCG expertise; skilled negotiator.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="mb-16 text-center bg-gray-100 rounded-2xl py-8 shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-xl">
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">Our Journey</h2>
+            <p class="text-gray-600 mb-12">Key milestones in our growth story</p>
+            <div class="relative max-w-4xl mx-auto px-4">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full border-l-2 border-blue-300"></div>
+                <div class="mb-8 flex justify-start items-center w-full">
+                    <div class="flex-1 text-right pr-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 text-left hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2020</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Concept Development, Brand Ideation</h3>
+                        </div>
+                    </div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1"></div>
+                </div>
+                <div class="mb-8 flex justify-end items-center w-full">
+                    <div class="flex-1"></div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1 text-left pl-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2021</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Market entry with Indian brand</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-8 flex justify-start items-center w-full">
+                    <div class="flex-1 text-right pr-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 text-left hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2022</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Nationwide Channel Expansion</h3>
+                        </div>
+                    </div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1"></div>
+                </div>
+                <div class="mb-8 flex justify-end items-center w-full">
+                    <div class="flex-1"></div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1 text-left pl-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2023</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Thai Brand Launch, Distribution Growth</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-8 flex justify-start items-center w-full">
+                    <div class="flex-1 text-right pr-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 text-left hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2024</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Vietnamese Brand Introduction</h3>
+                        </div>
+                    </div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1"></div>
+                </div>
+                <div class="mb-8 flex justify-end items-center w-full">
+                    <div class="flex-1"></div>
+                    <div class="w-4 h-4 rounded-full bg-blue-600 flex-shrink-0 z-10"></div>
+                    <div class="flex-1 text-left pl-12">
+                        <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                            <div class="text-sm font-semibold text-blue-600 mb-1">2025</div>
+                            <h3 class="font-semibold text-gray-800 text-lg">Supply Enhancement, Indian & UAE Brands</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+            <div class="bg-blue-50 border-l-4 border-blue-500 border border-blue-500  p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Mission</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    To be the leading FMCG distribution partner in Nepal, connecting premium brands with consumers across all communities while empowering our retail partners, our brand partners and contributing to the economic development of our nation.
+                </p>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-500 border border-green-500 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Our Vision</h3>
+                <p class="text-gray-700 leading-relaxed">
+                    To create a Nepal where every household has access to quality consumer goods, where small retailers thrive through our support, and where international brands see Nepal as an attractive and well-served market.
+                </p>
+            </div>
+        </section>
+    </div>
+{% endblock %}

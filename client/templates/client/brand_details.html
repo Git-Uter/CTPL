@@ -1,0 +1,245 @@
+{% extends "client/base.html" %}
+{% load static %}
+{% block title %}
+    {% if brand %}
+        {{ brand.name }} Products
+    {% else %}
+        Brand Details
+    {% endif %}
+    - Confidential Trading Pvt. Ltd.
+{% endblock %}
+{% block content %}
+    <style>
+    {% comment %} Custom CSS for Hover Effects {% endcomment %}
+    .image-hover-scale {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .image-hover-scale:hover {
+        transform: scale(1.05);
+    }
+
+    .card-hover-shadow {
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .card-hover-shadow:hover {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-hover-shadow:hover {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    .btn-primary:focus {
+        @apply ring ring-blue-300 ring-opacity-50;
+    }
+    .btn-secondary:focus {
+        @apply ring ring-gray-300 ring-opacity-50;
+    }
+
+    /* FIX FOR IPAD LANDSCAPE LAYOUT */
+    @media (min-width: 1024px) and (max-width: 1279px) {
+        .grid.ipad-landscape-product-fix {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    {% comment %} Modal styles {% endcomment %}
+    .modal {
+        display: flex;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.8);
+        justify-content: center;
+        align-items: center;
+        opacity: 0; /* Start hidden for fade-in */
+        visibility: hidden; /* Hide from screen readers and interaction */
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    .modal.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .modal-content {
+        display: block;
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        transform: scale(0.95); /* Start slightly smaller for subtle animation */
+        transition: transform 0.3s ease-in-out;
+        border-radius: 1rem; /* rounded-2xl equivalent */
+    }
+
+    .modal.show .modal-content {
+        transform: scale(1); /* Scale to normal size when shown */
+    }
+    </style>
+    <div class="py-8 max-w-7xl">
+        <a href="{% url 'our_brands' %}"
+           class="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200 text-lg font-semibold">
+            <i class="bi bi-arrow-left-circle-fill text-2xl mr-3"></i>
+            <span>Back to All Brands</span>
+        </a>
+    </div>
+    <section class="bg-gradient-to-r from-blue-50 to-white text-gray-900 py-16 md:py-20 rounded-3xl shadow-lg section-hover-shadow transition-shadow duration-300 ease-in-out mb-12">
+        <div class="container mx-auto px-6 lg:px-12 max-w-7xl">
+            {% if brand %}
+                <h1 class="font-extrabold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">{{ brand.name }}</h1>
+                <p class="text-lg md:text-xl text-gray-700 mb-4">{{ brand.description }}</p>
+                <p class="text-base md:text-lg text-gray-600 mt-2">
+                    <i class="bi bi-geo-alt-fill mr-2 text-blue-500"></i>Country: {{ brand.country }}
+                    {% if brand.establish_date %}
+                        <span class="mx-3">|</span> <i class="bi bi-calendar-fill mr-2 text-blue-500"></i>Est. {{ brand.establish_date|date:"Y" }}
+                    {% endif %}
+                </p>
+            {% else %}
+                <h1 class="font-extrabold text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">Brand Not Found</h1>
+                <p class="text-lg md:text-xl text-gray-700">The brand you are looking for does not exist or was not specified.</p>
+            {% endif %}
+        </div>
+    </section>
+    <section class="py-16 md:py-24 bg-white rounded-2xl shadow-lg section-hover-shadow transition-shadow duration-300 ease-in-out mb-12">
+        <div class="container mx-auto px-6 md:px-12 lg:px-24">
+            {% if products %}
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">Our Products from {{ brand.name }}</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 ipad-landscape-product-fix">
+                    {% for product in products %}
+                        <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col card-hover-shadow p-6">
+                            <div class="w-full h-48 md:h-56 lg:h-64 mb-4 rounded-xl overflow-hidden shadow-sm cursor-pointer"
+                                 onclick="openModal(this)">
+                                <img src="{{ product.image.url }}"
+                                     alt="{{ product.name }}"
+                                     class="w-full h-full object-contain image-hover-scale">
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2 truncate">{{ product.name }}</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">{{ product.description }}</p>
+                            <div class="mb-4 text-sm flex items-center">
+                                <p class="text-gray-700 font-semibold mr-2 flex-shrink-0">
+                                    <i class="bi bi-hourglass-split mr-1 text-blue-500"></i>Self Life:
+                                </p>
+                                <span class="text-gray-800 font-medium">{{ product.self_life }}</span>
+                            </div>
+                            <div class="mb-4 text-sm">
+                                <p class="text-gray-700 font-semibold mb-1">
+                                    <i class="bi bi-rulers mr-1 text-blue-500"></i>Available Sizes:
+                                </p>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    {% if product.get_available_sizes_list %}
+                                        {% for size in product.get_available_sizes_list %}
+                                            <span class="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full shadow-sm font-medium">#{{ size }}</span>
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full shadow-sm font-medium">N/A</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="mt-auto text-sm">
+                                <p class="text-gray-700 font-semibold mb-1">
+                                    <i class="bi bi-box-seam-fill mr-1 text-blue-500"></i>Packaging:
+                                </p>
+                                <p class="text-gray-600">
+                                    {% if product.get_packaging_list %}
+                                        {% for pack in product.get_packaging_list %}
+                                            {{ pack }}
+                                            {% if not forloop.last %},{% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        Not Specified
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ipad-landscape-product-fix">
+                    <div class="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden flex flex-col card-hover-shadow p-6">
+                        <div class="w-full h-48 md:h-56 lg:h-64 mb-4 rounded-xl overflow-hidden shadow-sm">
+                            <img src="{% static 'images/default_product.jpg' %}"
+                                 alt="No Products Available"
+                                 class="w-full h-full object-contain image-hover-scale">
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">No Products Available</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                            We are currently curating an exquisite selection of premium products to meet Nepal's market demands. Please check back soon for exciting additions to our catalog.
+                        </p>
+                        <div class="mb-4 text-sm flex items-center">
+                            <p class="text-gray-700 font-semibold mr-2 flex-shrink-0">
+                                <i class="bi bi-hourglass-split mr-1 text-blue-500"></i>Self Life:
+                            </p>
+                            <span class="text-gray-800 font-medium">Not Specified</span>
+                        </div>
+                        <div class="mb-4 text-sm">
+                            <p class="text-gray-700 font-semibold mb-1">
+                                <i class="bi bi-rulers mr-1 text-blue-500"></i>Available Sizes:
+                            </p>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full shadow-sm font-medium">N/A</span>
+                            </div>
+                        </div>
+                        <div class="mt-auto text-sm">
+                            <p class="text-gray-700 font-semibold mb-1">
+                                <i class="bi bi-box-seam-fill mr-1 text-blue-500"></i>Packaging:
+                            </p>
+                            <p class="text-gray-600">N/A</p>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+    <section class="bg-gradient-to-r from-blue-50 to-white text-gray-900 py-16 md:py-20 rounded-3xl shadow-lg section-hover-shadow transition-shadow duration-300 ease-in-out">
+        <div class="container mx-auto px-6 md:px-12 lg:px-24 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Interested in Our Products?</h2>
+            <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-4xl mx-auto">
+                Contact us to learn more about partnership opportunities and product availability.
+            </p>
+            <a href="{% url 'connect_us' %}"
+               class="btn-primary inline-block bg-blue-600 text-white font-semibold px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 ease-in-out text-base md:text-lg transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
+                Contact Our Team
+            </a>
+        </div>
+    </section>
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <img class="modal-content" id="img01">
+    </div>
+    <script>
+    // Get the modal
+    var modal = document.getElementById("imageModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var modalImg = document.getElementById("img01");
+
+    function openModal(element) {
+        var imgElement = element.querySelector('img');
+        modalImg.src = imgElement.src;
+        // Add a small delay before adding the 'show' class to ensure the transition plays
+        setTimeout(() => {
+            modal.classList.add('show');
+        }, 10); // Small delay, e.g., 10ms
+    }
+
+    // When the user clicks anywhere on the modal backdrop, close it
+    function closeModal() {
+        modal.classList.remove('show');
+        // Optional: Clear the image source after the animation finishes
+        // to prevent it from briefly showing the old image when opening next time.
+        setTimeout(() => {
+            modalImg.src = '';
+        }, 300); // Match this delay to your CSS transition duration
+    }
+
+    // Prevent closing the modal when clicking the image itself
+    modalImg.onclick = function(event) {
+        event.stopPropagation(); // Stop the click event from bubbling up to the modal background
+    };
+    </script>
+{% endblock %}

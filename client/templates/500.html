@@ -1,0 +1,18 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Server Error</title>
+        <link rel="icon" type="image/x-icon" href="{% static 'images/ctpl.png' %}">
+        <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    </head>
+    <body class="h-full flex items-center justify-center text-center">
+        <div class="max-w-md">
+            <h1 class="text-6xl font-bold text-red-600">500</h1>
+            <p class="mt-4 text-lg text-gray-700">Something went wrong on our end. Please try again later.</p>
+            <a href="{% url 'home' %}"
+               class="mt-6 inline-block px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition">Go Home</a>
+        </div>
+    </body>
+</html>
