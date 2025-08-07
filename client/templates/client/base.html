@@ -8,7 +8,6 @@
             {% block title %}Confidential Trading PVT. LTD.{% endblock %}
         </title>
         <link rel="icon" type="image/x-icon" href="{% static 'images/ctpl.png' %}">
-        {% comment %} <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"> {% endcomment %}
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
               rel="stylesheet">
         <link rel="stylesheet"
@@ -20,12 +19,17 @@
               referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="{% static 'css/output.css' %}">
         <style>
-        {% comment %} CSS for Navbar layout Mobile and Desktop {% endcomment %}
+        /* CSS for Navbar layout Mobile and Desktop */
         #mobile-menu-drawer {
-            transform: translateX(-100%);
+            /* Position the drawer to the right of the screen */
+            right: 0;
+            left: auto;
+            /* Initially move the drawer 100% off-screen to the right */
+            transform: translateX(100%);
             transition: transform 0.3s ease-in-out;
         }
         #mobile-menu-drawer.open {
+            /* Slide the drawer back into view */
             transform: translateX(0);
         }
         #drawer-overlay {
@@ -33,7 +37,7 @@
             z-index: 40;
         }
 
-        {% comment %} Responsive adjustments for WhatsApp button {% endcomment %}
+        /* Responsive adjustments for WhatsApp button */
         .whatsapp-button {
             bottom: 1rem;
             right: 1rem; 
@@ -58,13 +62,7 @@
     <body class="bg-white text-gray-800 flex flex-col min-h-screen font-inter antialiased">
         <nav class="bg-white shadow-md py-4 flex items-center justify-center sticky top-0 z-50">
             <div class="container mx-auto px-6 md:px-12 lg:px-24 flex items-center justify-between flex-wrap">
-                <div class="block lg:hidden order-1">
-                    <button id="nav-toggle"
-                            class="flex items-center px-3 py-2 bg-gray-200 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 focus:outline-none">
-                        <i class="bi bi-list text-xl"></i>
-                    </button>
-                </div>
-                <div class="flex items-center flex-shrink-0 text-gray-900 mr-6 order-2 lg:order-none">
+                <div class="flex items-center flex-shrink-0 text-gray-900 mr-6 order-1 lg:order-none">
                     <a href="{% url 'home' %}" class="flex items-center">
                         <img src="{% static 'images/ctpl.jpeg' %}"
                              alt="Company Logo"
@@ -74,6 +72,12 @@
                             <p class="font-semibold text-sm tracking-tight">TRADING PVT. LTD.</p>
                         </div>
                     </a>
+                </div>
+                <div class="block lg:hidden order-2">
+                    <button id="nav-toggle"
+                            class="flex items-center px-3 py-2 bg-gray-200 rounded-lg transition duration-300 ease-in-out hover:bg-gray-300 focus:outline-none">
+                        <i class="bi bi-list text-xl"></i>
+                    </button>
                 </div>
                 <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block"
                      id="nav-content">
@@ -93,7 +97,7 @@
             </div>
         </nav>
         <div id="mobile-menu-drawer"
-             class="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 lg:hidden flex flex-col pt-4">
+             class="fixed top-0 right-0 h-full w-64 bg-white shadow-lg z-50 lg:hidden flex flex-col pt-4">
             <a href="{% url 'home' %}"
                class="mx-4 my-2 px-4 py-2 rounded-lg text-left transition duration-300 ease-in-out {% if request.resolver_match.url_name == 'home' %}bg-blue-600 text-white{% else %}text-gray-800 hover:text-blue-600 hover:bg-blue-100{% endif %}">Home</a>
             <a href="{% url 'about_us' %}"
@@ -184,7 +188,7 @@
             </div>
         </footer>
         <script>
-            {% comment %} For Mobile Menu Drawer {% endcomment %}
+            /* For Mobile Menu Drawer */
     const navToggle = document.getElementById('nav-toggle');
     const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
     const drawerOverlay = document.getElementById('drawer-overlay');
